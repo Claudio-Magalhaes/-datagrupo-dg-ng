@@ -1,7 +1,7 @@
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpRequest} from "@angular/common/http";
 import {catchError, filter, switchMap, take} from "rxjs/operators";
-import {AbstractTokenService} from "../services/token/abstract-token.service";
 import {BehaviorSubject, Observable, throwError} from "rxjs";
+import {AbstractTokenService} from "./abstract-token.service";
 
 
 export abstract class AbstractAddToken {

@@ -1,16 +1,4 @@
 import { NgModule } from '@angular/core';
-import { DgNgComponent } from './dg-ng.component';
 
-
-
-@NgModule({
-  declarations: [
-    DgNgComponent
-  ],
-  imports: [
-  ],
-  exports: [
-    DgNgComponent
-  ]
-})
+@NgModule()
 export class DgNgModule { }

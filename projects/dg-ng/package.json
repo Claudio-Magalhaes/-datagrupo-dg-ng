@@ -7,5 +7,9 @@
   },
   "dependencies": {
     "tslib": "^2.3.0"
+  },
+  "scripts": {
+    "start-dg-ng": "ng build dg-ng --watch",
+    "build-dg-ng": "ng build dg-ng"
   }
 }

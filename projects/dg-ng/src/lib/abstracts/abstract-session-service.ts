@@ -1,5 +1,5 @@
-import {AbstractTokenService} from "../token/abstract-token.service";
 import {HostListener, Injectable} from "@angular/core";
+import {AbstractTokenService} from "./abstract-token.service";
 
 abstract class abstractUserSessionEntity {}
 
