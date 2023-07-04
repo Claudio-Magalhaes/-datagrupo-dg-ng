@@ -1,5 +1,5 @@
 {
-  "name": "dg-ng",
+  "name": "@datagrupo/dg-ng",
   "version": "0.1.0",
   "peerDependencies": {
     "@angular/common": "^13.2.0",
