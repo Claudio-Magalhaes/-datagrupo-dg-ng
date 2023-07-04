@@ -82,7 +82,7 @@ window.dispatchEvent(new EventEmitter('sistem-logout'))
 
 <hr/>
 
-#### Classe AbstractTokenService na íntegra para estudo e subscrições
+#### Classe AbstractSessionService na íntegra para estudo e subscrições
 
 ````ts
 export abstract class AbstractSessionService {

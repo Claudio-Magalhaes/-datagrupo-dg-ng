@@ -1,8 +1,10 @@
 # Iniciando projeto ng
 
+* [Voltar](../../README.md)
 * [Iniciando angular](#inciando-angular)
 * [Criando ambientes](#criando-ambientes)
 * [Instalando bibliotecas](#criando-ambientes)
+* [Criando estrutura SCSS](#criando-estrutura-scss)
 
 [//]: # (* [Criando estrutura SCSS]&#40;#criando-estrutura-scss&#41;)
 
@@ -208,7 +210,7 @@ Importação via "*angular.json*"
 
 ## Criando estrutura SCSS
 
-Aqui irei aqui apenas descrever as informações básicas
+Aqui irei apenas descrever as informações básicas
 e como proceder para criar uma estrutura de estilo organizada.
 
 Maiores informações sobre 'como' e 'por que' em [estruturando estilo SCSS](estruturando-estilo.md).
