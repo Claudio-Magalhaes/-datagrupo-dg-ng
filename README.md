@@ -1,8 +1,5 @@
 # DG-NG
 
-<b>Documentação privada</b>
-<br>
-
 Essa bilioteca serve para guardar a arquitetura central de projetos, padronizando fluxos e fornecendo funções uteis para
 a criação de um projeto angular. Fluxos e funções contidas nessa lib.
 
