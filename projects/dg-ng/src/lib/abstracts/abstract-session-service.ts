@@ -45,9 +45,25 @@ export abstract class AbstractSessionService {
 
   //TODO criar metodos de 'crud' de attr dinamicos
 
+  //***********************************************************
+  //*************** COLEÇÕES DE DADOS DINAMICOS ***************
+  // As coleções de dados (atributos) que são informações necessárias na SessionService
+  // para não ser necessário criar metodos para salvar cada atributo e depois recolhe-los também
+  // individualmente nas SESSIONGUARD, esses metodos abaixo foram criados
+
   /**
-   * @deprecated
-   * Metodo ainda não finalizado
+   * Metodo responsável para salvar os dados na LOCALSTORAGE
+   * Esse metodo não é obrigatório, pois realiza apenas um "setItem",
+   * mas foi criado para manter a coerencia dos metodos
+   * @param data
+   * @param localStorageName
+   */
+  saveAttr(data: any, localStorageName:string):void {
+    window.localStorage.setItem((localStorageName), JSON.stringify(data))
+  }
+
+  /**
+   * Metodo verifica se a coleção de dados existe na intancia ou no LOCALSTORAGE
    * @param name
    * @param localStorageName
    */
@@ -57,18 +73,19 @@ export abstract class AbstractSessionService {
       return !!this[name]
     }
 
-    const item = JSON.parse(String(window.localStorage.getItem((localStorageName || name))));
+    let attr = window.localStorage.getItem((localStorageName || name));
 
-    return !!item;
+    return !!attr;
   }
 
   /**
-   * @deprecated
-   * Metodo ainda não finalizado
+   * Metodo retorna os dados da coleção de dados desejada, caso os dados existam apenas
+   * no LOCALSTORAGE, esse metodo irá salvar os dados na instancia para agilizar as próximas
+   * buscas
    * @param name
    * @param localStorageName
    */
-  getAttr(name: string, localStorageName?:string):any {
+  getAttr<T>(name: string, localStorageName?:string): any | T {
     if (this.issetAttr(name)) {
       if (name in this) {
 
@@ -76,35 +93,51 @@ export abstract class AbstractSessionService {
         if (!!this[name]) return this[name];
       }
 
-      // @ts-ignore
-      this[name] = JSON.parse(String(window.localStorage.getItem((localStorageName || name))))
+      let attr = window.localStorage.getItem((localStorageName || name));
 
-      // @ts-ignore
-      return this[name]
+      if (!!attr) {
+        attr = JSON.parse(String(attr));
+
+        // salvando dados reconlhidos na instância para melhorar o desempenho do sistema
+        // @ts-ignore
+        this[name] = attr;
+
+        return attr;
+      }
     }
 
     return false
   }
 
   /**
-   * @deprecated
-   * Metodo ainda não finalizado
-   * @param data
+   * Metodo forçar uma nova busca nos LOCALSTORAGE da coleção informada e atualizar
+   * o seu atributo correspondente
    * @param name
    * @param localStorageName
    */
-  setAttr(data: any, name: string, localStorageName?:string):void {
-    // @ts-ignore
-    this[name] = data;
-    window.localStorage.setItem((localStorageName || name), JSON.stringify(data))
+  popular(name: string, localStorageName?:string):void {
+    const attr = this.getAttr(name, localStorageName)
+
+    if (attr != null) {
+      // @ts-ignore
+      this[name] = attr;
+    }
   }
 
   /**
-   * @deprecated
-   * Metodo ainda não implementado
+   * Metodo para remover a coleção de dados
    * @param name
+   * @param removeInstance
    * @param localStorageName
    */
-  removeAttr(name: string, localStorageName?:string) {}
+  removeAttr(name: string, removeInstance: boolean = true, localStorageName?:string) {
+    window.localStorage.setItem((localStorageName || name), '');
+    window.localStorage.removeItem((localStorageName || name));
+
+    if (removeInstance && (name in this)) {
+      // @ts-ignore
+      this[name] = undefined;
+    }
+  }
 }
 
